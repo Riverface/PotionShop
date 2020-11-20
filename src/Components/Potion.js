@@ -2,9 +2,9 @@ import '../App.css';
 
 import PropTypes from "prop-types";
 import React from 'react';
-import jayRef from '../brave_9fFAai3W72.png';
 
 function Potion(props) {
+    const potionStyle = { width : '100px', height: "100px", fontFamily:"sans-serif", paddingTop:"50px" }
     return (
         <React.Fragment>
 

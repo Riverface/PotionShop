@@ -1,5 +1,14 @@
 .App {
   text-align: center;
+  border:5px outset outset;
+  border-style:outset;
+  background-color:oldlace;
+  max-width:500px;
+  max-height:500px;
+  min-height:500px;
+  margin:100px;
+  border-radius: 20px;
+  
 }
 
 .App-logo {

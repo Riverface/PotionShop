@@ -1,53 +1,53 @@
 import React, { Component } from 'react'
 
+import { PotionForm } from './PotionForm';
 import PropTypes from "prop-types";
-import { ReusableForm } from './ReusableForm';
 
-export function EditTicketForm(props) {
-    const { ticket } = props;
+export function EditPotionForm(props) {
+    const { potion } = props;
 
-    function handleEditTicketFormSubmission(event) {
+    function handleEditPotionFormSubmission(event) {
         event.preventDefault();
-        props.onEditTicket({
-            names: event.target.names.value,
-            location: event.target.location.value,
-            issue: event.target.issue.value,
-            id: ticket.id
+        props.onEditPotion({
+            name: event.target.names.value,
+            attName: event.target.attName.value,
+            attMod: event.target.attMod.value,
+            id: potion.id
         });
     }
 
     return (
         <React.Fragment>
-            <ReusableForm
-                formSubmissionHandler={handleEditTicketFormSubmission} /* new code */
-                buttonText="Update Ticket" />
+            <PotionForm
+                formSubmissionHandler={handleEditPotionFormSubmission} /* new code */
+                buttonText="Update Potion" />
         </React.Fragment>
     );
 }
-function EditNewTicket(props) {
-    const { ticket } = props;
+function EditNewPotion(props) {
+    const { potion } = props;
 
-    function handleEditTicketFormSubmission(event) {
+    function handleEditPotionFormSubmission(event) {
         event.preventDefault();
-        props.onEditTicket({
+        props.onEditPotion({
             names: event.target.names.value,
             location: event.target.location.value,
             issue: event.target.issue.value,
-            id: ticket.id
+            id: potion.id
         });
     }
 
     return (
         <React.Fragment>
-            <ReusableForm
-                formSubmissionHandler={handleEditTicketFormSubmission} /* new code */
-                buttonText="Update Ticket" id={ticket.id} />
+            <PotionForm
+                formSubmissionHandler={handleEditPotionFormSubmission} /* new code */
+                buttonText="Update Potion" id={potion.id} />
         </React.Fragment>
     );
 }
-EditTicketForm.propTypes = {
-    ticket: PropTypes.object,
-    onEditTicket: PropTypes.func
+EditPotionForm.propTypes = {
+    potion: PropTypes.object,
+    onEditPotion: PropTypes.func
 };
 
-export default EditTicketForm;
+export default EditPotionForm;

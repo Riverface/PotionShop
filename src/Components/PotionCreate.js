@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
+import PotionForm from './PotionForm';
 import PropTypes from "prop-types";
-import ReusableForm from './ReusableForm';
 import { v4 } from 'uuid'; // new code
 
 function PotionCreate(props) {
     return (
         <React.Fragment>
-            <ReusableForm
+            <PotionForm
                 formSubmissionHandler={handlePotionCreateSubmission}
                 buttonText="Help!" />
         </React.Fragment>

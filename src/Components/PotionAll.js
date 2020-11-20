@@ -3,29 +3,40 @@ import PropTypes from "prop-types";
 import React from "react";
 import v4 from "uuid";
 
-// remove const masterPotionAll = [ ... ]. We no longer want these.
+function PotionAll(props) {
+  const listStyle = {
+    minWidth: '75%',
+    maxWidth: '75%',
+    marginLeft:"12.5%",
+    marginRight:"25%",
 
-function PotionAll(props){
-
+    fontFamily: "sans-serif",
+    paddingTop: "inherit",
+    maxHeight: '100px',
+    minHeight: '100px',
+    border:"inherit",
+    margin:10,
+    borderStyle:"inset",
+    borderColor: "outset"
+  }
   return (
-    <React.Fragment>
-      <hr/>
-      {props.PotionAll.map((Potion) =>
-
+    <div style={listStyle}>
+      <hr />
+      {props.All.map((Potion) =>
         <Potion
-          whenPotionClicked = { props.onPotionSelection }
-          names={Potion.names}
+          whenPotionClicked={props.onPotionSelection}
+          names={Potion.title}
           location={Potion.location}
-          issue={Potion.issue}
+          attName={Potion.attName}
           id={Potion.id}
-          key={Potion.id}/>
+          key={Potion.id} />
       )}
-    </React.Fragment>
+    </div>
   );
 }
 
 PotionAll.propTypes = {
-  PotionAll: PropTypes.array,
+  All: PropTypes.array,
   onPotionSelection: PropTypes.func
 };
 
