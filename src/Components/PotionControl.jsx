@@ -11,7 +11,14 @@ class PotionControl extends React.Component {
         super(props);
         this.state = {
             formVisibility: false,
-            masterPotionList: [],
+            masterPotionList: [
+                {
+                    name: "fuckyou",
+                    id:"0",
+                    attName:"scoop",
+                    attMod:"0"
+                }
+            ],
             CRUDAphase: 0,
             selected: null
         };
@@ -48,7 +55,7 @@ class PotionControl extends React.Component {
             CRUDAphase: 0
         });
     }
-    selectionHandler=(id) => {
+    selectionHandler = (id) => {
         const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
         this.setState({ selectedPotion: selectedPotion });
     }

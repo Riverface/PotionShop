@@ -9,19 +9,19 @@ function PotionCreate(props) {
         <React.Fragment>
             <PotionForm
                 formSubmissionHandler={handlePotionCreateSubmission}
-                buttonText="Help!" />
+                buttonText="Sell me this, Potion Seller!" />
         </React.Fragment>
     );
 
     function handlePotionCreateSubmission(event) {
         console.log(event);
-        props.onNewTicketCreation({ names: event.target.names.value, location: event.target.location.value, issue: event.target.issue.value, id: v4() });
+        props.onNewpotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, id: v4() });
     }
 
 }
 
 PotionCreate.propTypes = {
-    onNewTicketCreation: PropTypes.func
+    onNewpotionCreation: PropTypes.func
 };
 
 export default PotionCreate;

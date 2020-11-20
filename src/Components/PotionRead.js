@@ -8,8 +8,8 @@ function PotionRead(props) {
     return (
         <React.Fragment>
             <h1>potion Detail for potion {v4()}</h1>
-            <h3>{potion.location} - {potion.names}</h3>
-            <p><em>{potion.issue}</em></p>
+            <h3>{potion.attName} - {potion.attMod}</h3>
+            <p><em>{potion.flavorText}</em></p>
             <button onClick={props.onClickingEdit}>Update potion</button> { /* new code */}
             <button onClick={() => props.onClickingDelete(potion.id)}>Close potion</button>
             <hr />

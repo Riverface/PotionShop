@@ -7,29 +7,28 @@ function PotionAll(props) {
   const listStyle = {
     minWidth: '75%',
     maxWidth: '75%',
-    marginLeft:"12.5%",
-    marginRight:"25%",
-
+    marginLeft: "auto",
+    marginRight: "auto",
     fontFamily: "sans-serif",
     paddingTop: "inherit",
     maxHeight: '100px',
     minHeight: '100px',
-    border:"inherit",
-    margin:10,
-    borderStyle:"inset",
-    borderColor: "outset"
+    border: "4px inset inset",
+    borderWidth: "4px",
+    borderStyle: "inset",
+    borderRadius: "5px",
   }
   return (
     <div style={listStyle}>
       <hr />
-      {props.All.map((Potion) =>
+      {props.All.map((potion) =>
         <Potion
           whenPotionClicked={props.onPotionSelection}
-          names={Potion.title}
-          location={Potion.location}
-          attName={Potion.attName}
-          id={Potion.id}
-          key={Potion.id} />
+          names={potion.title}
+          attName={potion.attName}
+          attMod={potion.attMod}
+          id={potion.id}
+          key={potion.id} />
       )}
     </div>
   );
