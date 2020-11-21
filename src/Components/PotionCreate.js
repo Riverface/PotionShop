@@ -15,13 +15,13 @@ function PotionCreate(props) {
 
     function handlePotionCreateSubmission(event) {
         console.log(event);
-        props.onNewpotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, id: v4() });
+        props.onNewPotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, id: v4() });
     }
 
 }
 
 PotionCreate.propTypes = {
-    onNewpotionCreation: PropTypes.func
+    onNewPotionCreation: PropTypes.func
 };
 
 export default PotionCreate;

@@ -3,13 +3,13 @@ import React, { Component } from 'react'
 import { PotionForm } from './PotionForm';
 import PropTypes from "prop-types";
 
-export function EditPotionForm(props) {
+export function PotionUpdate(props) {
     const { potion } = props;
 
-    function handleEditPotionFormSubmission(event) {
+    function handlePotionUpdateSubmission(event) {
         event.preventDefault();
         props.onEditPotion({
-            name: event.target.names.value,
+            title: event.target.title.value,
             attName: event.target.attName.value,
             attMod: event.target.attMod.value,
             id: potion.id
@@ -19,7 +19,7 @@ export function EditPotionForm(props) {
     return (
         <React.Fragment>
             <PotionForm
-                formSubmissionHandler={handleEditPotionFormSubmission} /* new code */
+                formSubmissionHandler={handlePotionUpdateSubmission} /* new code */
                 buttonText="Update Potion" />
         </React.Fragment>
     );
@@ -27,10 +27,10 @@ export function EditPotionForm(props) {
 function EditNewPotion(props) {
     const { potion } = props;
 
-    function handleEditPotionFormSubmission(event) {
+    function handlePotionUpdateSubmission(event) {
         event.preventDefault();
         props.onEditPotion({
-            names: event.target.names.value,
+            title: event.target.title.value,
             location: event.target.location.value,
             issue: event.target.issue.value,
             id: potion.id
@@ -40,14 +40,14 @@ function EditNewPotion(props) {
     return (
         <React.Fragment>
             <PotionForm
-                formSubmissionHandler={handleEditPotionFormSubmission} /* new code */
+                formSubmissionHandler={handlePotionUpdateSubmission} /* new code */
                 buttonText="Update Potion" id={potion.id} />
         </React.Fragment>
     );
 }
-EditPotionForm.propTypes = {
+PotionUpdate.propTypes = {
     potion: PropTypes.object,
     onEditPotion: PropTypes.func
 };
 
-export default EditPotionForm;
+export default PotionUpdate;

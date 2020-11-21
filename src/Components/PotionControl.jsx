@@ -10,58 +10,94 @@ class PotionControl extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            formVisibility: false,
             masterPotionList: [
                 {
-                    name: "fuckyou",
-                    id:"0",
-                    attName:"scoop",
-                    attMod:"0"
-                }
+                    title: "Potion of Power",
+                    id: v4(),
+                    attName: "Strength",
+                    attMod: "+1"
+                }, {
+                    title: "Potion of Finger Strength",
+                    id: v4(),
+                    attName: "Dexterity",
+                    attMod: "+5"
+                },
+                {
+                    title: "Potion of Masochism",
+                    id: v4(),
+                    attName: "Vitality/Dexterity",
+                    attMod: "+5/-5"
+                },
+                {
+                    title: "Potion of Feebleness",
+                    id: v4(),
+                    attName: "Strength",
+                    attMod: "-2"
+                },
             ],
-            CRUDAphase: 0,
+
+            CRUDEPhase: 0,
             selected: null
         };
     }
     // CRUD = Create, Read, Update, Delete.
 
-    // CRUDAphase = CRUD + All ( int )
+    // CRUDEPhase = CRUD + All ( int )
 
     // 1 : create, 2 : Read, 3 : Update, 4 : Delete, 5 : All.
 
     inListEditHandler = (potionToEdit) => {
-        const allPotionsChanged = this.state.masterPotionList.filter(potion => potion.id !== this.state.selectedPotion.id).concat(potionToEdit);
+        const allPotionsChanged = this.state.masterPotionList
+            .filter(potion => potion.id !== this.state.selectedPotion.id)
+            .concat(potionToEdit);
         this.setState({
             masterPotionList: allPotionsChanged,
-            CRUDAphase: 0
+            CRUDEPhase: 5
         });
     }
     editHandler = () => {
         console.log("editing!");
-        this.setState({ editing: true });
+        this.setState({
+            CRUDEPhase: 3
+        });
     }
     returnHandler = () => {
         if (this.state.selectedPotion != null) {
-            this.setState({ selectedPotion: null, formVisibility: false, editing: false });
+            this.setState({ selectedPotion: null, CRUDEPhase: 5 });
         }
         else {
-            this.setstate(prevState => ({ formVisibility: !prevState.formVisibility }));
+            this.setState(prevState => (
+                {
+                    CRUDEPhase: !prevState.CRUDEPhase
+                }
+            )
+            );
         }
     }
     createHandler = (newPotion) => {
         const newMasterPotionList = this.state.masterPotionList.concat(newPotion);
         this.setState({
             masterPotionList: newMasterPotionList,
-            CRUDAphase: 0
+            CRUDEPhase: 5
         });
     }
+
     selectionHandler = (id) => {
         const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
-        this.setState({ selectedPotion: selectedPotion });
+        console.log(selectedPotion);
+        this.setState({
+            selectedPotion: selectedPotion,
+            CRUDEPhase: 2
+        });
     }
+
     deleteHandler = (id) => {
         const newMasterPotionList = this.state.masterPotionList.filter(potion => potion.id !== this.state.selectedPotion.id);
-        this.setState({ masterPotionList: newMasterPotionList, selectedPotion: null });
+        this.setState({
+            masterPotionList: newMasterPotionList,
+            selectedPotion: null,
+            CRUDEPhase: 5
+        });
     }
 
 
@@ -69,32 +105,40 @@ class PotionControl extends React.Component {
         let visibleState = null;
         let backButton = null;
         // CRUD = Create, Read, Update, Delete.
-        // CRUDAphase = (CRUD, A = All) ( int )
-        // 1 : create, 2 : Read, 3 : Update, 4 : Delete, 5 (or anything else, really) : All (Force to 5).
-
-        switch (this.state.CRUDAPhase) {
+        // CRUDEPhase = (CRUD, E = Everything) ( int )
+        // 1 : create, 
+        // 2 : Read, 
+        // 3 : Update, 
+        // 4 : Delete, 
+        // Default : Everything (Forced to 5 for sake of acronym.).
+        switch (this.state.CRUDEPhase) {
             case 1:
-                backButton = "Show all Potions";
-                visibleState = <PotionCreate selectedPotionId={this.selected} onEditing={this.createHandler} />
+                backButton = "Back to List";
+                visibleState = <PotionCreate selectedPotion={this.selectedPotion} onEditing={this.createHandler} />
                 break;
             case 2:
-                backButton = "Show all Potions";
-                visibleState = <PotionRead />
+                backButton = "Back to List";
+                console.log(this.selectedPotion);
+                visibleState = <PotionRead potion={this.state.selectedPotion}/>
                 break;
             case 3:
-                backButton = "Show all Potions";
-                visibleState = <PotionUpdate />
+                backButton = "Back to List";
+                visibleState = <PotionUpdate onUpdate={this.updateHandler} />
                 break;
             case 4:
-                backButton = "Show all Potions";
-                visibleState = <PotionDelete />
+                backButton = "Back to List";
+                visibleState = <PotionDelete onDelete={this.deleteHandler} />
                 break;
             default:
-                backButton = "Show All Potions";
                 visibleState = <PotionAll All={this.state.masterPotionList} onSelection={this.selectionHandler} />
                 break;
         }
-        return visibleState;
+        return <React.Fragment>
+            {
+                visibleState
+            }
+            {backButton}
+        </React.Fragment>;
     }
 
 

@@ -11,8 +11,9 @@ function PotionAll(props) {
     marginRight: "auto",
     fontFamily: "sans-serif",
     paddingTop: "inherit",
-    maxHeight: '100px',
-    minHeight: '100px',
+    maxHeight: '300px',
+    minHeight: '300px',
+    overflow: 'auto',
     border: "4px inset inset",
     borderWidth: "4px",
     borderStyle: "inset",
@@ -23,8 +24,8 @@ function PotionAll(props) {
       <hr />
       {props.All.map((potion) =>
         <Potion
-          whenPotionClicked={props.onPotionSelection}
-          names={potion.title}
+          onSelection={props.onSelection}
+          title={potion.title}
           attName={potion.attName}
           attMod={potion.attMod}
           id={potion.id}
@@ -36,7 +37,7 @@ function PotionAll(props) {
 
 PotionAll.propTypes = {
   All: PropTypes.array,
-  onPotionSelection: PropTypes.func
+  onSelection: PropTypes.func
 };
 
 export default PotionAll;

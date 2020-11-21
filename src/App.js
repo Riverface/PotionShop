@@ -1,5 +1,7 @@
 import './App.css';
 
+import React,  { Component } from 'react';
+
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import PotionControl from './Components/PotionControl'
