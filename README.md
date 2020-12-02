@@ -7,6 +7,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Component Tree:
 ![Component Tree](componentTree.png)
 
+My component tree's design deviated as I noticed things could be simpler. 
+Since the changes I made weren't additions I didn't see fit to update the design.
+
 ## Available Scripts
 
 In the project directory, you can run:
