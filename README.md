@@ -9,6 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 My component tree's design deviated as I noticed things could be simpler. 
 Since the changes I made weren't additions I didn't see fit to update the design.
+The delete window is my own addition to reduce mistakes.
 
 ## Available Scripts
 
