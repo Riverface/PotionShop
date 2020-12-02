@@ -7,15 +7,20 @@ export function PotionForm(props) {
       <form onSubmit={props.formSubmissionHandler}>
         <input
           type='text'
-          name=''
-          placeholder='Pair Names' />
+          name='attName'
+          placeholder='Attribute Name...' />
         <input
           type='text'
-          name=''
-          placeholder='Location' />
-        <textarea
           name='attMod'
-          placeholder='Describe your issue.' />
+          placeholder='Modifier...' />
+        <input
+          type='text'
+          name='title'
+          placeholder='Potion Title...' />
+        <textarea
+          name='flavorText'
+          placeholder='Flavor Text...' />
+
         <button type='submit'>{props.buttonText}</button>
       </form>
     </React.Fragment>

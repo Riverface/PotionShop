@@ -15,7 +15,7 @@ function PotionCreate(props) {
 
     function handlePotionCreateSubmission(event) {
         console.log(event);
-        props.onNewPotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, id: v4() });
+        props.onNewPotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, flavorText: event.target.flavorText.value, id: v4() });
     }
 
 }

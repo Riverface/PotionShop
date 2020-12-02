@@ -3,7 +3,7 @@ import React from "react";
 import { v4 } from 'uuid'
 
 function PotionRead(props) {
-    const { potion, onClickingDelete, onClickingEdit } = props; //new code
+    const { potion, deleteDialogHandler, onClickingUpdate } = props; //new code
 
     return (
         <React.Fragment>
@@ -11,8 +11,8 @@ function PotionRead(props) {
             <h1>{potion.title}</h1>
             <h3>{potion.attName} : {potion.attMod}</h3>
             <p><em>{potion.flavorText}</em></p>
-            <button onClick={props.onClickingEdit}>Update potion</button> { /* new code */}
-            <button onClick={() => props.onClickingDelete(potion.id)}>Remove potion</button>
+            <button onClick={props.onClickingUpdate}>Update potion</button> { /* new code */}
+            <button onClick={() => props.deleteDialogHandler(potion.id)}>Remove potion</button>
             <hr />
         </React.Fragment>
     );
@@ -20,8 +20,8 @@ function PotionRead(props) {
 
 PotionRead.propTypes = {
     potion: PropTypes.object,
-    onClickingDelete: PropTypes.func,
-    onClickingEdit: PropTypes.func // new code
+    deleteDialogHandler: PropTypes.func,
+    onClickingUpdate: PropTypes.func // new code
 };
 
 export default PotionRead;
