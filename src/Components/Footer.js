@@ -2,9 +2,10 @@ import React from "react";
 
 function Footer() {
     return (
-        <React.Fragment>
+        <div>
+            <br></br>
         No refunds
-        </React.Fragment>
+        </div>
     );
 }
 export default Footer;

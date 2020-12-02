@@ -46,8 +46,8 @@ class PotionControl extends React.Component {
     // CRUD = Create, Read, Update, Delete.
 
     // CRUDEPhase = CRUD + All ( int )
-
     // 1 : create, 2 : Read, 3 : Update, 4 : Delete, 5 : All.
+    // A mnemonic device.
 
     inListEditHandler = (potionToEdit) => {
         const allPotionsChanged = this.state.masterPotionList
@@ -102,10 +102,12 @@ class PotionControl extends React.Component {
             CRUDEPhase: 5
         });
     }
+
     deleteDialogHandler = (id) => {
+        const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
         this.setState({
             CRUDEPhase: 4,
-            selectedPotion: this.state.masterPotionList.filter(potion => potion.id !== id)
+            selectedPotion: selectedPotion,
         });
     }
     createMenuHandler = (id) => {
@@ -119,13 +121,13 @@ class PotionControl extends React.Component {
         let potionList = <PotionAll All={this.state.masterPotionList} onSelection={this.selectionHandler} />;
         // CRUD = Create, Read, Update, Delete.
         // CRUDEPhase = (CRUD, E = Everything) ( int )
-        // 1 : create, 
-        // 2 : Read, 
-        // 3 : Update, 
-        // 4 : Delete, 
+        // 1 : create,
+        // 2 : Read,
+        // 3 : Update,
+        // 4 : Delete,
         // Default : Everything (Forced to 5 for sake of acronym.).
         if (this.state.CRUDEPhase > 4 || this.state.CRUDEPhase < 1) {
-            buttons = <React.Fragment><button onClick={this.createMenuHandler}></button></React.Fragment>;
+            buttons = <React.Fragment><button onClick={this.createMenuHandler}>Brew Potion</button></React.Fragment>;
         }
         else {
             buttons = <React.Fragment><button onClick={this.returnHandler}>Back to List</button></React.Fragment>;
@@ -144,8 +146,8 @@ class PotionControl extends React.Component {
                 break;
             case 4:
                 visibleState = <React.Fragment>
+                    {<PotionDelete potion={this.state.selectedPotion} onDelete={this.deleteHandler} /> }
                     {potionList}
-                    {<PotionDelete potion={this.state.selectedPotion} onDelete={this.deleteHandler} />}
                 </React.Fragment>;
                 break;
             default:
@@ -153,10 +155,7 @@ class PotionControl extends React.Component {
                 break;
         }
         return <React.Fragment>
-            {
-                visibleState
-            }
-            {buttons}
+            {visibleState}{buttons}
         </React.Fragment>;
     }
 }
