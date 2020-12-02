@@ -22,7 +22,8 @@ export function PotionForm(props) {
 
   const potionTitleStyle = {
     border: "1px inset inset",
-    borderRadius: "10px", margin: "2vh"
+    borderRadius: "10px",
+    margin: "2vh"
   }
 
   const flavorTextStyle = {
@@ -40,6 +41,13 @@ export function PotionForm(props) {
       <form onSubmit={props.formSubmissionHandler}>
         <div>
           <input
+            style={potionTitleStyle, styling}
+            type='text'
+            name='title'
+            placeholder='Potion Title...' />
+        </div>
+        <div>
+          <input
             style={attNameStyle, styling}
             type='text'
             name='attName'
@@ -52,13 +60,7 @@ export function PotionForm(props) {
             name='attMod'
             placeholder='Modifier...' />
         </div>
-        <div>
-          <input
-            style={potionTitleStyle, styling}
-            type='text'
-            name='title'
-            placeholder='Potion Title...' />
-        </div>
+
         <div>
           <textarea
             style={flavorTextStyle}

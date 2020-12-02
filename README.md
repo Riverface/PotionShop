@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Potion Shop
+
+### A potion shop with flexible parameters to allow for different measurements.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Component Tree:
+![Component Tree](componentTree.png)
 
 ## Available Scripts
 
@@ -68,3 +73,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Copyright
+
+
+CC0 (public domain) Robert Smith 2020©
