@@ -33,7 +33,7 @@ function PotionRead(props) {
             <div>
                 <button onClick={() => props.onClickStockSell(document.getElementById('dosesSold').value)}>Buy/Sell</button>
                 <div>
-                    <input id="dosesSold" type="number" name="dosesSold" ></input>
+                    <input id="dosesSold" type="number" name="dosesSold" min={-potion.volume} max={potion.volume} ></input>
                     <div></div>
                 </div>
             </div>

@@ -75,22 +75,20 @@ class PotionControl extends React.Component {
     sellStockHandler = (quantity) => {
         const modifier = parseInt(quantity);
         let potionToEdit = this.state.selectedPotion;
-        console.log(this.state, potionToEdit);
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
-
-        console.log(newCost);
         potionToEdit.volume += 100 * quantity;
-        console.log(potionToEdit);
         const allPotionsChanged = this.state.masterPotionList
             .filter(potion => potion.id !== this.state.selectedPotion.id)
             .concat(potionToEdit);
-        this.setState(prevState => (
-            {
-                masterPotionList: allPotionsChanged,
-                CRUDEPhase: 5,
-                debtCredit: prevState.debtCredit += newCost
-            }
-        ))
+        if (quantity < this.state.selectedPotion.volume) {
+            this.setState(prevState => (
+                {
+                    masterPotionList: allPotionsChanged,
+                    CRUDEPhase: 5,
+                    debtCredit: prevState.debtCredit += newCost
+                }
+            ))
+        }
     }
     editHandler = () => {
         console.log("editing!");
