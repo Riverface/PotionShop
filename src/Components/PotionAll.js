@@ -1,7 +1,6 @@
-import Potion from "./Potion";
-import PropTypes from "prop-types";
-import React from "react";
-import v4 from "uuid";
+import Potion from './Potion';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 function PotionAll(props) {
   const listStyle = {
@@ -29,6 +28,10 @@ function PotionAll(props) {
           attName={potion.attName}
           attMod={potion.attMod}
           id={potion.id}
+          volume={potion.volume}
+          measurement={potion.measurement}
+          flavorText={potion.flavorText}
+          costByVolume={potion.costByVolume}
           key={potion.id} />
       )}
     </div>

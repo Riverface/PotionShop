@@ -1,11 +1,9 @@
 import './App.css';
 
-import React,  { Component } from 'react';
-
 import Footer from './Components/Footer';
 import Header from './Components/Header';
-import PotionControl from './Components/PotionControl'
-import logo from './logo.svg';
+import PotionControl from './Components/PotionControl';
+import React from 'react';
 
 function App() {
   return (

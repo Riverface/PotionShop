@@ -1,9 +1,10 @@
+import React, { PropTypes } from 'react';
+
 import PotionAll from './PotionAll';
 import PotionCreate from './PotionCreate';
 import PotionDelete from './PotionDelete';
 import PotionRead from './PotionRead';
 import PotionUpdate from './PotionUpdate';
-import React from 'react';
 import { v4 } from 'uuid';
 
 class PotionControl extends React.Component {
@@ -16,31 +17,44 @@ class PotionControl extends React.Component {
                     id: v4(),
                     attName: "Strength",
                     attMod: "+666",
-                    flavorText: "POWER OVERWHELMING."
+                    flavorText: "POWER OVERWHELMING",
+                    measurement: "ml",
+                    volume: 100,
+                    costByVolume: 150
                 }, {
                     title: "Potion of Finger Strength",
                     id: v4(),
                     attName: "Dexterity",
                     attMod: "+5",
-                    flavorText: "It's all about finger strength, baby."
+                    flavorText: "It's all about finger strength, baby.",
+                    measurement: "ml",
+                    volume: 100,
+                    costByVolume: 200
                 },
                 {
                     title: "Potion of Masochism",
                     id: v4(),
                     attName: "Vitality/Dexterity",
                     attMod: "+5/-5",
-                    flavorText: "OUCH. Gimme another!"
+                    flavorText: "OUCH. Gimme another!",
+                    measurement: "ml",
+                    volume: 100,
+                    costByVolume: 250
                 },
                 {
                     title: "Potion of Feebleness",
                     id: v4(),
                     attName: "Strength",
                     attMod: "-2",
-                    flavorText: "I was born with glass bones and paper skin. Would you like to buy some chocolate?"
+                    flavorText: "I was born with glass bones and paper skin. Would you like to buy some chocolate?",
+                    measurement: "ml",
+                    volume: 100,
+                    costByVolume: 100
                 },
             ],
             CRUDEPhase: 0,
-            selected: null
+            selected: null,
+            debtCredit: 0
         };
     }
     // CRUD = Create, Read, Update, Delete.
@@ -57,6 +71,26 @@ class PotionControl extends React.Component {
             masterPotionList: allPotionsChanged,
             CRUDEPhase: 5
         });
+    }
+    sellStockHandler = (quantity) => {
+        const modifier = parseInt(quantity);
+        let potionToEdit = this.state.selectedPotion;
+        console.log(this.state, potionToEdit);
+        const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
+
+        console.log(newCost);
+        potionToEdit.volume += 100 * quantity;
+        console.log(potionToEdit);
+        const allPotionsChanged = this.state.masterPotionList
+            .filter(potion => potion.id !== this.state.selectedPotion.id)
+            .concat(potionToEdit);
+        this.setState(prevState => (
+            {
+                masterPotionList: allPotionsChanged,
+                CRUDEPhase: 5,
+                debtCredit: prevState.debtCredit += newCost
+            }
+        ))
     }
     editHandler = () => {
         console.log("editing!");
@@ -84,7 +118,6 @@ class PotionControl extends React.Component {
             CRUDEPhase: 5
         });
     }
-
     selectionHandler = (id) => {
         const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
         console.log(selectedPotion);
@@ -115,10 +148,15 @@ class PotionControl extends React.Component {
             CRUDEPhase: 1
         });
     }
+
     render(props) {
+
         let visibleState = null;
         let buttons = null;
-        let potionList = <PotionAll All={this.state.masterPotionList} onSelection={this.selectionHandler} />;
+        let potionList = <div>
+            <PotionAll All={this.state.masterPotionList} onSelection={this.selectionHandler} />
+            <p>Account Funds:{this.state.debtCredit}</p>
+        </div>;
         // CRUD = Create, Read, Update, Delete.
         // CRUDEPhase = (CRUD, E = Everything) ( int )
         // 1 : create,
@@ -127,27 +165,34 @@ class PotionControl extends React.Component {
         // 4 : Delete,
         // Default : Everything (Forced to 5 for sake of acronym.).
         if (this.state.CRUDEPhase > 4 || this.state.CRUDEPhase < 1) {
-            buttons = <React.Fragment><button onClick={this.createMenuHandler}>Brew Potion</button></React.Fragment>;
+            buttons = <React.Fragment>
+                <button onClick={this.createMenuHandler}>
+                    Brew Potion
+                    </button>
+
+            </React.Fragment>;
         }
         else {
-            buttons = <React.Fragment><button onClick={this.returnHandler}>Back to List</button></React.Fragment>;
+            buttons = <React.Fragment>
+                <button onClick={this.returnHandler}>Back to List</button>
+            </React.Fragment>;
         }
-
         switch (this.state.CRUDEPhase) {
             case 1:
                 visibleState = <PotionCreate onNewPotionCreation={this.createHandler} />
                 break;
             case 2:
-                console.log(this.selectedPotion);
-                visibleState = <PotionRead potion={this.state.selectedPotion} onClickingUpdate={this.editHandler} deleteDialogHandler={this.deleteDialogHandler} />
+                console.log(this.state.selectedPotion);
+                visibleState = <PotionRead potion={this.state.selectedPotion} debtCredit={this.state.debtCredit} onClickingUpdate={this.editHandler} deleteDialogHandler={this.deleteDialogHandler} onClickStockSell={this.sellStockHandler} />
                 break;
             case 3:
                 visibleState = <PotionUpdate potion={this.state.selectedPotion} onUpdate={this.inListEditHandler} />
                 break;
             case 4:
                 visibleState = <React.Fragment>
-                    {<PotionDelete potion={this.state.selectedPotion} onDelete={this.deleteHandler} /> }
+                    {<PotionDelete potion={this.state.selectedPotion} onDelete={this.deleteHandler} />}
                     {potionList}
+
                 </React.Fragment>;
                 break;
             default:

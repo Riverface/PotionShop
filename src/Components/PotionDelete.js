@@ -1,6 +1,5 @@
-import PropTypes from "prop-types";
-import React from "react";
-import { v4 } from 'uuid'
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const styles = { minWidth:"30vw",maxWidth:"30vw", minHeight:"35vh",maxHeight:"35vh", margin:"auto", display:"inline",position:"absolute", border:"10px red outset", borderRadius:"10px", background: "#FA8072", borderStyle:"outset"};
 

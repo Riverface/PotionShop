@@ -1,8 +1,7 @@
-import React, { Component } from 'react'
-
 import PotionForm from './PotionForm';
-import PropTypes from "prop-types";
-import { v4 } from 'uuid'; // new code
+import PropTypes from 'prop-types';
+import React from 'react';
+import { v4 } from 'uuid';
 
 function PotionCreate(props) {
     return (
@@ -14,8 +13,14 @@ function PotionCreate(props) {
     );
 
     function handlePotionCreateSubmission(event) {
-        console.log(event);
-        props.onNewPotionCreation({ title: event.target.title.value, attName: event.target.attName.value, attMod: event.target.attMod.value, flavorText: event.target.flavorText.value, id: v4() });
+        props.onNewPotionCreation({
+            title: event.target.title.value,
+            attName: event.target.attName.value,
+            attMod: event.target.attMod.value,
+            flavorText: event.target.flavorText.value,
+            volume: parseInt(event.target.volume.value),
+            id: v4()
+        });
     }
 
 }
