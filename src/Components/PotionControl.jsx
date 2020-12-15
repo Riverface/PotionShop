@@ -76,16 +76,16 @@ class PotionControl extends React.Component {
         const modifier = parseInt(quantity);
         let potionToEdit = this.state.selectedPotion;
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
-        potionToEdit.volume += 100 * quantity;
         const allPotionsChanged = this.state.masterPotionList
-            .filter(potion => potion.id !== this.state.selectedPotion.id)
-            .concat(potionToEdit);
-        if (quantity < this.state.selectedPotion.volume) {
+        .filter(potion => potion.id !== this.state.selectedPotion.id)
+        .concat(potionToEdit);
+        potionToEdit.volume += 100 * quantity;
+        if (quantity <= this.state.selectedPotion.volume) {
             this.setState(prevState => (
                 {
                     masterPotionList: allPotionsChanged,
                     CRUDEPhase: 5,
-                    debtCredit: prevState.debtCredit += newCost
+                    debtCredit: prevState.debtCredit -= newCost
                 }
             ))
         }
@@ -177,7 +177,16 @@ class PotionControl extends React.Component {
         }
         switch (this.state.CRUDEPhase) {
             case 1:
-                visibleState = <PotionCreate onNewPotionCreation={this.createHandler} />
+                let potion = {
+                    title: "",
+                    attName: "",
+                    attMod: "",
+                    flavorText: "",
+                    measurement: "",
+                    volume: 0,
+                    costByVolume: 0
+                }
+                visibleState = <PotionCreate onNewPotionCreation={this.createHandler} potion={potion} />;
                 break;
             case 2:
                 console.log(this.state.selectedPotion);

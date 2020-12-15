@@ -22,7 +22,7 @@ export function PotionUpdate(props) {
         <React.Fragment>
             <PotionForm
                 formSubmissionHandler={handlePotionUpdateSubmission} /* new code */
-                buttonText="Update Potion" />
+                buttonText="Update Potion" potion={potion} />
         </React.Fragment>
     );
 }
