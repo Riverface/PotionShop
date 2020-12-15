@@ -1,4 +1,3 @@
-import PotionControl from './PotionControl';
 import PotionForm from './PotionForm';
 import PropTypes from 'prop-types';
 import React from 'react';

@@ -2,11 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function PotionRead(props) {
-    const { potion,
-        deleteDialogHandler,
-        onClickingUpdate,
-        onClickStockSell,
-    } = props; //new code
+    const { potion} = props; //new code
 
     return (
         <React.Fragment>
@@ -33,7 +29,9 @@ function PotionRead(props) {
             <div>
                 <button onClick={() => props.onClickStockSell(document.getElementById('dosesSold').value)}>Sell(-)/Stock(+)</button>
                 <div>
-                    <input id="dosesSold" type="number" name="dosesSold" min={-potion.volume} max={potion.volume} ></input>
+                    <p>{potion.volume}ml  </p>
+                    <p>{(potion.volume / 100)} potion(s)</p>
+                    Doses to stock/sell: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={-potion.volume} max={potion.volume} ></input>
                     <div></div>
                 </div>
             </div>

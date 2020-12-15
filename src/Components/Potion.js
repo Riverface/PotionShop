@@ -4,8 +4,7 @@ import PropTypes from "prop-types";
 import React from 'react';
 
 function Potion(props) {
-    const potionStyle = { width: '100px', height: "100px", fontFamily: "sans-serif", paddingTop: "50px" }
-    return (
+       return (
         <React.Fragment>
             <div onClick={() => props.onSelection(props.id)}>
                 <h3>

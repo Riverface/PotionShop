@@ -5,7 +5,7 @@ const styles = { minWidth:"30vw",maxWidth:"30vw", minHeight:"35vh",maxHeight:"35
 
 
 function PotionDelete(props) {
-    const { potion, onDelete,  } = props; //new code
+    const { potion   } = props; //new code
 
     return (
         <div style={styles}>

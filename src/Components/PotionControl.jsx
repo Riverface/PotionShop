@@ -1,10 +1,9 @@
-import React, { PropTypes } from 'react';
-
 import PotionAll from './PotionAll';
 import PotionCreate from './PotionCreate';
 import PotionDelete from './PotionDelete';
 import PotionRead from './PotionRead';
 import PotionUpdate from './PotionUpdate';
+import React from 'react';
 import { v4 } from 'uuid';
 
 class PotionControl extends React.Component {
@@ -73,14 +72,13 @@ class PotionControl extends React.Component {
         });
     }
     sellStockHandler = (quantity) => {
-        const modifier = parseInt(quantity);
         let potionToEdit = this.state.selectedPotion;
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
         const allPotionsChanged = this.state.masterPotionList
         .filter(potion => potion.id !== this.state.selectedPotion.id)
         .concat(potionToEdit);
         potionToEdit.volume += 100 * quantity;
-        if (quantity <= this.state.selectedPotion.volume) {
+        if ((100 *quantity) <= this.state.selectedPotion.volume) {
             this.setState(prevState => (
                 {
                     masterPotionList: allPotionsChanged,
@@ -91,7 +89,7 @@ class PotionControl extends React.Component {
         }
     }
     editHandler = () => {
-        console.log("editing!");
+
         this.setState({
             CRUDEPhase: 3
         });
@@ -118,7 +116,6 @@ class PotionControl extends React.Component {
     }
     selectionHandler = (id) => {
         const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
-        console.log(selectedPotion);
         this.setState({
             selectedPotion: selectedPotion,
             CRUDEPhase: 2
@@ -189,7 +186,6 @@ class PotionControl extends React.Component {
                 visibleState = <PotionCreate onNewPotionCreation={this.createHandler} potion={potion} />;
                 break;
             case 2:
-                console.log(this.state.selectedPotion);
                 visibleState = <PotionRead potion={this.state.selectedPotion} debtCredit={this.state.debtCredit} onClickingUpdate={this.editHandler} deleteDialogHandler={this.deleteDialogHandler} onClickStockSell={this.sellStockHandler} />
                 break;
             case 3:
