@@ -1,18 +1,26 @@
 import './App.css';
+import './index.css';
+
+import * as serviceWorker from './serviceWorker';
 
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import PotionControl from './Components/PotionControl';
 import React from 'react';
+import { connect } from 'react-redux';
 
+const store = createStore(ticketListReducer);
 function App() {
   return (
     <div className="App">
-      <Header />
-      <PotionControl />
-      <Footer />
+      <Provider store={store}>
+        <Header />
+        <PotionControl />
+        <Footer />
+      </Provider>
     </div>
   );
 }
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 export default App;

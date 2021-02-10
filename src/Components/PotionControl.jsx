@@ -75,10 +75,10 @@ class PotionControl extends React.Component {
         let potionToEdit = this.state.selectedPotion;
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
         const allPotionsChanged = this.state.masterPotionList
-        .filter(potion => potion.id !== this.state.selectedPotion.id)
-        .concat(potionToEdit);
+            .filter(potion => potion.id !== this.state.selectedPotion.id)
+            .concat(potionToEdit);
         potionToEdit.volume += 100 * quantity;
-        if ((100 *quantity) <= this.state.selectedPotion.volume) {
+        if ((100 * quantity) <= this.state.selectedPotion.volume) {
             this.setState(prevState => (
                 {
                     masterPotionList: allPotionsChanged,
