@@ -9,7 +9,6 @@ import PotionControl from './Components/PotionControl';
 import React from 'react';
 import { connect } from 'react-redux';
 
-const store = createStore(ticketListReducer);
 function App() {
   return (
     <div className="App">
@@ -22,5 +21,6 @@ function App() {
   );
 }
 const unsubscribe = store.subscribe(() => console.log(store.getState()));
-
+const store = createStore(potionListReducer);
+store.subscribe(()=>console.log(store.getState()));
 export default App;

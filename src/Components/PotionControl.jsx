@@ -1,211 +1,135 @@
-import PotionAll from './PotionAll';
-import PotionCreate from './PotionCreate';
-import PotionDelete from './PotionDelete';
-import PotionRead from './PotionRead';
-import PotionUpdate from './PotionUpdate';
+import * as a from './../actions';
+
+import EditPotionForm from './EditPotionForm';
+import NewPotionForm from './NewPotionForm';
+import PotionDetail from './PotionDetail';
+import PotionList from './PotionList';
+import PropTypes from "prop-types";
 import React from 'react';
-import { v4 } from 'uuid';
+import { connect } from 'react-redux';
 
 class PotionControl extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
-            masterPotionList: [
-                {
-                    title: "Potion of mitochondrial awakening",
-                    id: v4(),
-                    attName: "Strength",
-                    attMod: "+666",
-                    flavorText: "POWER OVERWHELMING",
-                    measurement: "ml",
-                    volume: 100,
-                    costByVolume: 150
-                }, {
-                    title: "Potion of Finger Strength",
-                    id: v4(),
-                    attName: "Dexterity",
-                    attMod: "+5",
-                    flavorText: "It's all about finger strength, baby.",
-                    measurement: "ml",
-                    volume: 100,
-                    costByVolume: 200
-                },
-                {
-                    title: "Potion of Masochism",
-                    id: v4(),
-                    attName: "Vitality/Dexterity",
-                    attMod: "+5/-5",
-                    flavorText: "OUCH. Gimme another!",
-                    measurement: "ml",
-                    volume: 100,
-                    costByVolume: 250
-                },
-                {
-                    title: "Potion of Feebleness",
-                    id: v4(),
-                    attName: "Strength",
-                    attMod: "-2",
-                    flavorText: "I was born with glass bones and paper skin. Would you like to buy some chocolate?",
-                    measurement: "ml",
-                    volume: 100,
-                    costByVolume: 100
-                },
-            ],
-            CRUDEPhase: 0,
-            selected: null,
-            debtCredit: 0
+            selectedPotion: null,
+            editing: false
         };
     }
-    // CRUD = Create, Read, Update, Delete.
 
-    // CRUDEPhase = CRUD + All ( int )
-    // 1 : create, 2 : Read, 3 : Update, 4 : Delete, 5 : All.
-    // A mnemonic device.
-
-    inListEditHandler = (potionToEdit) => {
-        const allPotionsChanged = this.state.masterPotionList
-            .filter(potion => potion.id !== this.state.selectedPotion.id)
-            .concat(potionToEdit);
-        this.setState({
-            masterPotionList: allPotionsChanged,
-            CRUDEPhase: 5
+    updatePotionElapsedWaitTime = () => {
+        const { dispatch } = this.props;
+        Object.values(this.props.masterPotionList).forEach(potion => {  //errors undefined object
+            const newFormattedWaitTime = potion.timeOpen.fromNow(true);
+            const action = a.updateTime(potion.id, newFormattedWaitTime);
+            dispatch(action);
         });
     }
-    sellStockHandler = (quantity) => {
-        let potionToEdit = this.state.selectedPotion;
-        const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
-        const allPotionsChanged = this.state.masterPotionList
-            .filter(potion => potion.id !== this.state.selectedPotion.id)
-            .concat(potionToEdit);
-        potionToEdit.volume += 100 * quantity;
-        if ((100 * quantity) <= this.state.selectedPotion.volume) {
-            this.setState(prevState => (
-                {
-                    masterPotionList: allPotionsChanged,
-                    CRUDEPhase: 5,
-                    debtCredit: prevState.debtCredit -= newCost
-                }
-            ))
-        }
-    }
-    editHandler = () => {
 
-        this.setState({
-            CRUDEPhase: 3
-        });
+    componentDidMount() {
+        this.waitTimeUpdateTimer = setInterval(() =>
+            this.updatePotionElapsedWaitTime(),
+            1000
+        );
     }
-    returnHandler = () => {
+
+    // We won't be using this method for our help queue update - but it's important to see how it works.
+    componentDidUpdate() {
+        console.log("component updated!");
+    }
+
+    componentWillUnmount() {
+        console.log("component unmounted!");
+        clearInterval(this.waitTimeUpdateTimer);
+    }
+
+    handleEditingPotionInList = (potionToEdit) => {
+        const { dispatch } = this.props;
+        this.setState({
+            editing: false,
+            selectedPotion: null
+        });
+        const action = a.addPotion(potionToEdit);
+        dispatch(action);
+    }
+
+    handleEditClick = () => {
+        this.setState({ editing: true });
+    }
+
+    handleClick = () => {
         if (this.state.selectedPotion != null) {
-            this.setState({ selectedPotion: null, CRUDEPhase: 5 });
+            this.setState({
+                selectedPotion: null,
+                editing: false
+            });
+        } else {
+            const { dispatch } = this.props;
+            const action = a.toggleForm();
+            dispatch(action);
         }
-        else {
-            this.setState(prevState => (
-                {
-                    CRUDEPhase: !prevState.CRUDEPhase
-                }
-            )
-            );
-        }
-    }
-    createHandler = (newPotion) => {
-        const newMasterPotionList = this.state.masterPotionList.concat(newPotion);
-        this.setState({
-            masterPotionList: newMasterPotionList,
-            CRUDEPhase: 5
-        });
-    }
-    selectionHandler = (id) => {
-        const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
-        this.setState({
-            selectedPotion: selectedPotion,
-            CRUDEPhase: 2
-        });
     }
 
-    deleteHandler = (id) => {
-        const newMasterPotionList = this.state.masterPotionList.filter(potion => potion.id !== this.state.selectedPotion.id);
-        this.setState({
-            masterPotionList: newMasterPotionList,
-            selectedPotion: null,
-            CRUDEPhase: 5
-        });
+
+    handleAddingNewPotionToList = (newPotion) => {
+        const { dispatch } = this.props;
+        const action = a.addPotion(newPotion);
+        dispatch(action);
+        const action2 = a.toggleForm();
+        dispatch(action2);
     }
 
-    deleteDialogHandler = (id) => {
-        const selectedPotion = this.state.masterPotionList.filter(potion => potion.id === id)[0];
-        this.setState({
-            CRUDEPhase: 4,
-            selectedPotion: selectedPotion,
-        });
+    handleChangingSelectedPotion = (id) => {
+        const selectedPotion = this.props.masterPotionList[id];
+        this.setState({ selectedPotion: selectedPotion });
     }
-    createMenuHandler = (id) => {
-        this.setState({
-            CRUDEPhase: 1
-        });
+    handleDeletingPotion = (id) => {
+        const { dispatch } = this.props;
+        const action = a.deletePotion(id);
+        dispatch(action);
+        this.setState({ selectedPotion: null });
     }
 
     render(props) {
-
-        let visibleState = null;
-        let buttons = null;
-        let potionList = <div>
-            <PotionAll All={this.state.masterPotionList} onSelection={this.selectionHandler} />
-            <p>Account Funds:{this.state.debtCredit}</p>
-        </div>;
-        // CRUD = Create, Read, Update, Delete.
-        // CRUDEPhase = (CRUD, E = Everything) ( int )
-        // 1 : create,
-        // 2 : Read,
-        // 3 : Update,
-        // 4 : Delete,
-        // Default : Everything (Forced to 5 for sake of acronym.).
-        if (this.state.CRUDEPhase > 4 || this.state.CRUDEPhase < 1) {
-            buttons = <React.Fragment>
-                <button onClick={this.createMenuHandler}>
-                    Brew Potion
-                    </button>
-
-            </React.Fragment>;
+        let currentlyVisibleState = null;
+        let buttonText = null;
+        if (this.state.editing) {
+            currentlyVisibleState = <EditPotionForm potion={this.state.selectedPotion} onEditPotion={this.handleEditingPotionInList} />
+            buttonText = "Return to Potion List";
+        } else if (this.state.selectedPotion != null) {
+            currentlyVisibleState = <PotionDetail potion={this.state.selectedPotion} onClickingDelete={this.handleDeletingPotion} onClickingEdit={this.handleEditClick} />
+            buttonText = "Return to Potion List";
+            // While our PotionDetail component only takes placeholder data, we will eventually be passing the value of selectedPotion as a prop.
+        } else if (this.props.formVisibleOnPage) {
+            // This conditional needs to be updated to "else if."
+            currentlyVisibleState = <NewPotionForm onNewPotionCreation={this.handleAddingNewPotionToList} />;
+            buttonText = "Return to Potion List";
+        } else {
+            currentlyVisibleState = <PotionList potionList={this.props.masterPotionList} onPotionSelection={this.handleChangingSelectedPotion} />;
+            // Because a user will actually be clicking on the potion in the Potion component, we will need to pass our new handleChangingSelectedPotion method as a prop.
+            buttonText = "Add Potion";
         }
-        else {
-            buttons = <React.Fragment>
-                <button onClick={this.returnHandler}>Back to List</button>
-            </React.Fragment>;
-        }
-        switch (this.state.CRUDEPhase) {
-            case 1:
-                let potion = {
-                    title: "",
-                    attName: "",
-                    attMod: "",
-                    flavorText: "",
-                    measurement: "",
-                    volume: 0,
-                    costByVolume: 0
-                }
-                visibleState = <PotionCreate onNewPotionCreation={this.createHandler} potion={potion} />;
-                break;
-            case 2:
-                visibleState = <PotionRead potion={this.state.selectedPotion} debtCredit={this.state.debtCredit} onClickingUpdate={this.editHandler} deleteDialogHandler={this.deleteDialogHandler} onClickStockSell={this.sellStockHandler} />
-                break;
-            case 3:
-                visibleState = <PotionUpdate potion={this.state.selectedPotion} onUpdate={this.inListEditHandler} />
-                break;
-            case 4:
-                visibleState = <React.Fragment>
-                    {<PotionDelete potion={this.state.selectedPotion} onDelete={this.deleteHandler} />}
-                    {potionList}
-
-                </React.Fragment>;
-                break;
-            default:
-                visibleState = potionList;
-                break;
-        }
-        return <React.Fragment>
-            {visibleState}{buttons}
-        </React.Fragment>;
+        return (
+            <React.Fragment>
+                {currentlyVisibleState}
+                <button onClick={this.handleClick}>{buttonText}</button>
+            </ React.Fragment>
+        );
     }
+
 }
 
+PotionControl.propTypes = {
+    masterPotionList: PropTypes.object,
+    formVisibleOnPage: PropTypes.bool
+};
+
+const mapStateToProps = state => {
+    return {
+        masterPotionList: state.masterPotionList,
+        formVisibleOnPage: state.formVisibleOnPage
+    }
+}
+PotionControl = connect(mapStateToProps)(PotionControl);
 export default PotionControl;
