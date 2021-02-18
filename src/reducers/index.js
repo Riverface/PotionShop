@@ -1,10 +1,9 @@
 import { combineReducers } from 'redux';
 import formVisibleReducer from './form-visible-reducer';
-import masterPotionList from './master-potion-list';
+import masterPotionAllReducer from './potion-list-reducer';
 
 const rootReducer = combineReducers({
-  masterPotionList: masterPotionListReducer,
-  CRUDEPhase: 0,
+  masterPotionAll: masterPotionAllReducer,
   debtCredit: 0
 });
 

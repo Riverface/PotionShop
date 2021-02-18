@@ -1,9 +1,9 @@
 import * as c from '../../actions/ActionTypes';
 
 import Moment from 'moment';
-import potionListReducer from '../../reducers/potion-list-reducer';
+import potionAllReducer from '../../reducers/potion-list-reducer';
 
-describe('potionListReducer', () => {
+describe('potionAllReducer', () => {
 
   let action;
 
@@ -30,10 +30,10 @@ describe('potionListReducer', () => {
   };
 
   test('Should return default state if no action type is recognized', () => {
-    expect(potionListReducer({}, { type: null })).toEqual({});
+    expect(potionAllReducer({}, { type: null })).toEqual({});
   });
 
-  test('Should successfully add new potion data to masterPotionList', () => {
+  test('Should successfully add new potion data to masterPotionAll', () => {
     const { names, location, issue, id } = potionData;
     action = {
       type: 'ADD_POTION',
@@ -42,7 +42,7 @@ describe('potionListReducer', () => {
       issue: issue,
       id: id
     };
-    expect(potionListReducer({}, action)).toEqual({
+    expect(potionAllReducer({}, action)).toEqual({
       [id]: {
         names: names,
         location: location,
@@ -57,7 +57,7 @@ describe('potionListReducer', () => {
       type: 'DELETE_POTION',
       id: 1
     };
-    expect(potionListReducer(currentState, action)).toEqual({
+    expect(potionAllReducer(currentState, action)).toEqual({
       2: {
         names: 'Jasmine and Justine',
         location: '2a',
@@ -73,7 +73,7 @@ describe('potionListReducer', () => {
       formattedWaitTime: '4 minutes',
       id: id
     };
-    expect(potionListReducer({ [id]: potionData }, action)).toEqual({
+    expect(potionAllReducer({ [id]: potionData }, action)).toEqual({
       [id]: {
         names: names,
         location: location,
@@ -96,7 +96,7 @@ describe('potionListReducer', () => {
       id: id,
       formattedWaitTime: new Moment().fromNow(true)
     };
-    expect(potionListReducer({}, action)).toEqual({
+    expect(potionAllReducer({}, action)).toEqual({
       [id]: {
         names: names,
         location: location,

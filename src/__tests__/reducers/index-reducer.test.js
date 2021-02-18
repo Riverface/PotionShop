@@ -1,6 +1,6 @@
 import { createStore } from 'redux';
 import formVisibleReducer from '../../reducers/form-visible-reducer';
-import potionListReducer from '../../reducers/potion-list-reducer';
+import potionAllReducer from '../../reducers/potion-list-reducer';
 import rootReducer from '../../reducers/index';
 
 describe("rootReducer", () => {
@@ -8,18 +8,18 @@ describe("rootReducer", () => {
     let store = createStore(rootReducer);
   test('Should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toEqual({
-      masterPotionList: {},
+      masterPotionAll: {},
       formVisibleOnPage: false
     });
   });
-  test('Check that initial state of potionListReducer matches root reducer', () => {
-    expect(store.getState().masterPotionList).toEqual(potionListReducer(undefined, { type: null }));
+  test('Check that initial state of potionAllReducer matches root reducer', () => {
+    expect(store.getState().masterPotionAll).toEqual(potionAllReducer(undefined, { type: null }));
   });
   
   test('Check that initial state of formVisibleReducer matches root reducer', () => {
     expect(store.getState().formVisibleOnPage).toEqual(formVisibleReducer(undefined, { type: null }));
   });
-  test('Check that ADD_POTION action works for both potionListReducer and root reducer', () => {
+  test('Check that ADD_POTION action works for both potionAllReducer and root reducer', () => {
     const action = {
       type: 'ADD_POTION',
       names: 'Ryan & Aimen',
@@ -28,7 +28,7 @@ describe("rootReducer", () => {
       id: 1
     }
     store.dispatch(action);
-    expect(store.getState().masterPotionList).toEqual(potionListReducer({}, action));
+    expect(store.getState().masterPotionAll).toEqual(potionAllReducer({}, action));
   });
   
   test('Check that TOGGLE_FORM action works for both formVisibleReducer and root reducer', () => {

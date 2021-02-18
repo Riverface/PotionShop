@@ -20,8 +20,7 @@ function PotionAll(props) {
   }
   return (
     <div style={listStyle}>
-      <hr />
-      {props.All.map((potion) =>
+      {props.potionAll.map((potion) =>
         <Potion
           onSelection={props.onSelection}
           title={potion.title}
@@ -39,7 +38,7 @@ function PotionAll(props) {
 }
 
 PotionAll.propTypes = {
-  All: PropTypes.array,
+  potionAll: PropTypes.array,
   onSelection: PropTypes.func
 };
 
