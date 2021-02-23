@@ -4,7 +4,8 @@ import masterPotionAllReducer from './potion-list-reducer';
 
 const rootReducer = combineReducers({
   masterPotionAll: masterPotionAllReducer,
-  debtCredit: 0
+  debtCredit: 0,
+  formVisibleOnPage: formVisibleReducer
 });
 
 export default rootReducer;

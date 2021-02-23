@@ -8,21 +8,24 @@ export const toggleForm = () => ({
     type: c.TOGGLE_FORM
 });
 export const addPotion = (potion) => {
-    const { title, id, attName, attMod, flavorText, measurement, volume, costByVolume } = potion;
+    const { title, id, attName, attMod, flavorText, measurement, volume, costByVolume, restockRate } = potion;
     return {
         type: c.ADD_POTION,
+        title: title,
         id: id,
         attName: attName,
         attMod: attMod,
         flavorText: flavorText,
         measurement: measurement,
         volume: volume,
-        costByVolume: costByVolume
+        costByVolume: costByVolume,
+        restockRate: restockRate
     }
 };
 
-export const updateTime = (id, formattedWaitTime) => ({
-    type: c.UPDATE_TIME,
+export const updateStock = (id, restockRate, volume) => ({
+    type: c.UPDATE_STOCK,
     id: id,
-    formattedWaitTime: formattedWaitTime
+    restockRate: restockRate,
+    volume: volume
 });

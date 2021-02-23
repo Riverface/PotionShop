@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function PotionRead(props) {
-    const { potion} = props; //new code
+    const { potion } = props; //new code
 
     return (
         <React.Fragment>
@@ -31,12 +31,12 @@ function PotionRead(props) {
                 <div>
                     <p>{potion.volume}ml  </p>
                     <p>{(potion.volume / 100)} potion(s)</p>
+                    <p>restock rate: {potion.restockRate}</p>
                     Doses to stock/sell: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={-potion.volume} max={potion.volume} ></input>
                     <div></div>
                 </div>
             </div>
             <hr />
-            
         </React.Fragment>
     );
 }
@@ -47,7 +47,6 @@ PotionRead.propTypes = {
     deleteDialogHandler: PropTypes.func,
     onClickingUpdate: PropTypes.func,
     onClickStockSell: PropTypes.func,
-
 };
 
 export default PotionRead;

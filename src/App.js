@@ -1,8 +1,6 @@
 import './App.css';
 import './index.css';
 
-import * as serviceWorker from './serviceWorker';
-
 import Footer from './Components/Footer';
 import Header from './Components/Header';
 import PotionControl from './Components/PotionControl';

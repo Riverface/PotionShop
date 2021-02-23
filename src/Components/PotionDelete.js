@@ -1,19 +1,17 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const styles = { minWidth:"30vw",maxWidth:"30vw", minHeight:"35vh",maxHeight:"35vh", margin:"auto", display:"inline",position:"absolute", border:"10px red outset", borderRadius:"10px", background: "#FA8072", borderStyle:"outset"};
+const styles = { minWidth: "30vw", maxWidth: "30vw", minHeight: "35vh", maxHeight: "35vh", margin: "auto", display: "inline", position: "absolute", border: "10px red outset", borderRadius: "10px", background: "#FA8072", borderStyle: "outset" };
 
 
 function PotionDelete(props) {
-    const { potion   } = props; //new code
+    const { potion } = props; //new code
 
     return (
         <div style={styles}>
             <h1>!</h1>
             <h1>Really Remove {potion.title}?</h1>
-
             <button onClick={() => props.onDelete(props.potion.id)}>Remove potion</button>
-
         </div>
     );
 }
@@ -21,6 +19,6 @@ function PotionDelete(props) {
 PotionDelete.propTypes = {
     potion: PropTypes.object,
     onDelete: PropTypes.func
-    };
+};
 
 export default PotionDelete;

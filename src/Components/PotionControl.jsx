@@ -1,5 +1,6 @@
 import * as a from './../actions';
 
+import Moment from 'moment';
 import PotionAll from './PotionAll';
 import PotionCreate from './PotionCreate';
 import PotionRead from './PotionRead';
@@ -14,34 +15,34 @@ class PotionControl extends React.Component {
         console.log(props);
         this.state = {
             selectedPotion: null,
-            editing: false
+            editing: false,
         };
     }
 
-    updatePotionElapsedWaitTime = () => {
+    volumeUpdater = () => {
         const { dispatch } = this.props;
-        Object.values(this.props.masterPotionAll).forEach(potion => {  //errors undefined object
-            const newFormattedWaitTime = potion.timeOpen.fromNow(true);
-            const action = a.updateTime(potion.id, newFormattedWaitTime);
+        Object.values(this.props.masterPotionAll).forEach(potion => {
+            console.log(potion);
+            const newVolume = potion.volume + potion.restockRate;
+            const action = a.updateStock(potion.id, potion.restockRate, newVolume);
             dispatch(action);
         });
     }
 
     componentDidMount() {
-        this.waitTimeUpdateTimer = setInterval(() =>
-            this.updatePotionElapsedWaitTime(),
+        this.waitTimeUpdateStock = setInterval(() =>
+            this.volumeUpdater(),
             1000
         );
     }
 
-    // We won't be using this method for our help queue update - but it's important to see how it works.
     componentDidUpdate() {
         console.log("component updated!");
     }
 
     componentWillUnmount() {
         console.log("component unmounted!");
-        clearInterval(this.waitTimeUpdateTimer);
+        clearInterval(this.waitTimeUpdateStock);
     }
 
     handleEditingPotionInList = (potionToEdit) => {
@@ -98,11 +99,9 @@ class PotionControl extends React.Component {
         if (this.state.editing) {
             currentlyVisibleState = <PotionUpdate potion={this.state.selectedPotion} onEditPotion={this.handleEditingPotionInList} />
             buttonText = "Return to Potion List";
-            
         } else if (this.state.selectedPotion != null) {
             currentlyVisibleState = <PotionRead potion={this.state.selectedPotion} onClickingDelete={this.handleDeletingPotion} onClickingEdit={this.handleEditClick} />
             buttonText = "Return to Potion List";
-            
             // While our PotionRead component only takes placeholder data, we will eventually be passing the value of selectedPotion as a prop.
         } else if (this.props.formVisibleOnPage) {
             // This conditional needs to be updated to "else if."

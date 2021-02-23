@@ -69,7 +69,7 @@ describe('potionAllReducer', () => {
   test('Should add a formatted wait time to potion entry', () => {
     const { names, location, issue, timeOpen, id } = potionData;
     action = {
-      type: c.UPDATE_TIME,
+      type: c.UPDATE_STOCK,
       formattedWaitTime: '4 minutes',
       id: id
     };

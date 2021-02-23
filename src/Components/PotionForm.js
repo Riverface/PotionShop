@@ -51,7 +51,6 @@ export function PotionForm(props) {
     maxHeight: '8vh',
     maxWidth: "300px"
   }
-  const { potion } = props;
   return (
     <React.Fragment>
       <form onSubmit={props.formSubmissionHandler}>
@@ -61,7 +60,7 @@ export function PotionForm(props) {
             style={potionTitleStyle && styling}
             type='text'
             name='title'
-            defaultValue={(potion.title == null) ? "" : potion.title}
+            defaultValue={(props.title == null) ? "" : props.title}
             placeholder='Potion Title...' />
         </div>
         <div>
@@ -70,7 +69,7 @@ export function PotionForm(props) {
             style={attNameStyle && styling}
             type='text'
             name='attName'
-            defaultValue={(potion.attName == null) ? "" : potion.attName}
+            defaultValue={(props.attName == null) ? "" : props.attName}
             placeholder='Attribute Name...' />
         </div>
         <div>
@@ -79,7 +78,7 @@ export function PotionForm(props) {
             style={attModStyle && styling}
             type='text'
             name='attMod'
-            defaultValue={(potion.attMod == null) ? "" : potion.attMod}
+            defaultValue={(props.attMod == null) ? "" : props.attMod}
             placeholder='Modifier...' />
         </div>
         <div>
@@ -88,7 +87,7 @@ export function PotionForm(props) {
             style={attModStyle && styling}
             type='number'
             name='volume'
-            defaultValue={(potion.volume == null) ? 0 : potion.volume}
+            defaultValue={(props.volume == null) ? 0 : props.volume}
             placeholder='volume' min='0' max='5000' />
         </div>
         <div>
@@ -97,15 +96,23 @@ export function PotionForm(props) {
             style={attModStyle && styling}
             type='number'
             name='costByVolume'
-            defaultValue={(potion.costByVolume == null) ? 0 : potion.costByVolume}
+            defaultValue={(props.costByVolume == null) ? 0 : props.costByVolume}
             placeholder='costByVolume' min='0' max='5000' />
         </div>
         <div>
           <textarea
             style={flavorTextStyle}
             name='flavorText'
-            defaultValue={(potion.flavorText == null) ? "" : potion.flavorText}
+            defaultValue={(props.flavorText == null) ? "" : props.flavorText}
             placeholder='Flavor Text...' />
+        </div>
+        <div>
+          <label>Restock Rate (ml/s)</label>
+          <input type="number"
+            style={styling}
+            name='restockRate'
+            defaultValue={(props.restockRate == null) ? 0 : props.restockRate}
+            placeholder='Restock Rate (ml/s)' />
         </div>
         <button style={styling} type='submit'>{props.buttonText}</button>
       </form>

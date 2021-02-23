@@ -20,9 +20,8 @@ function PotionAll(props) {
   }
   return (
     <div style={listStyle}>
-      {props.potionAll.map((potion) =>
-        <Potion
-          onSelection={props.onSelection}
+      { Object.values(props.potionAll).map((potion) => {
+        return <Potion onSelection={props.onSelection}
           title={potion.title}
           attName={potion.attName}
           attMod={potion.attMod}
@@ -31,15 +30,17 @@ function PotionAll(props) {
           measurement={potion.measurement}
           flavorText={potion.flavorText}
           costByVolume={potion.costByVolume}
+          restockRate={potion.restockRate}
           key={potion.id} />
-      )}
+      })
+      }
     </div>
   );
 }
 
 PotionAll.propTypes = {
-  potionAll: PropTypes.array,
-  onSelection: PropTypes.func
+  potionAll: PropTypes.object,
+  onPotionSelection: PropTypes.func
 };
 
 export default PotionAll;

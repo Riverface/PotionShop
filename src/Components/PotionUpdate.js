@@ -14,7 +14,8 @@ export function PotionUpdate(props) {
             volume: parseInt(event.target.volume.value),
             costByVolume: parseInt(event.target.costByVolume.value),
             flavorText: event.target.flavorText.value,
-            id: potion.id
+            id: potion.id,
+            restockRate: event.target.restockRate.value
         });
     }
 
