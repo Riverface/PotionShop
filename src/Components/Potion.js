@@ -36,7 +36,7 @@ Potion.propTypes = {
     attName: PropTypes.string,
     attMod: PropTypes.string,
     flavorText: PropTypes.string,
-    onPotionSelection: PropTypes.func,
+    onPotionSelection: PropTypes.func.isRequired,
     id: PropTypes.string,
     costByVolume: PropTypes.number,
     measurement:PropTypes.string,

@@ -1,8 +1,13 @@
 import * as c from './../actions/ActionTypes';
 
+import potionAll from '../assets/potionAll';
+import { v4 } from 'uuid'
+
 export default (state = {}, action) => {
   const { title, attName, attMod, flavorText, volume, id, costByVolume, restockRate } = action;
   switch (action.type) {
+    case c.START_UP:
+      return potionAll
     case c.ADD_POTION:
       return Object.assign({}, state, {
         [id]: {

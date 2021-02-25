@@ -32,7 +32,7 @@ function PotionRead(props) {
                     <p>{potion.volume}ml  </p>
                     <p>{(potion.volume / 100)} potion(s)</p>
                     <p>restock rate: {potion.restockRate}</p>
-                    Doses to stock/sell: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={-potion.volume} max={potion.volume} ></input>
+                    Doses to stock/sell: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={-potion.volume} ></input>
                     <div></div>
                 </div>
             </div>

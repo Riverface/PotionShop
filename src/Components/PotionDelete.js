@@ -11,14 +11,14 @@ function PotionDelete(props) {
         <div style={styles}>
             <h1>!</h1>
             <h1>Really Remove {potion.title}?</h1>
-            <button onClick={() => props.onDelete(props.potion.id)}>Remove potion</button>
+            <button onClick={() => props.onClickingDelete(potion.id)}>Remove potion</button>
         </div>
     );
 }
 
 PotionDelete.propTypes = {
     potion: PropTypes.object,
-    onDelete: PropTypes.func
+    onClickingDelete: PropTypes.func
 };
 
 export default PotionDelete;

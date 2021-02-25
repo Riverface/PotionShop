@@ -21,7 +21,7 @@ function PotionAll(props) {
   return (
     <div style={listStyle}>
       { Object.values(props.potionAll).map((potion) => {
-        return <Potion onSelection={props.onSelection}
+        return <Potion onPotionSelection={props.onPotionSelection}
           title={potion.title}
           attName={potion.attName}
           attMod={potion.attMod}
@@ -40,7 +40,7 @@ function PotionAll(props) {
 
 PotionAll.propTypes = {
   potionAll: PropTypes.object,
-  onPotionSelection: PropTypes.func
+  onPotionSelection: PropTypes.func.isRequired
 };
 
 export default PotionAll;

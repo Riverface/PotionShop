@@ -1,0 +1,46 @@
+{
+ "1": {
+  "attMod": "+666",
+  "attName": "Strength",
+  "costByVolume": 150,
+  "flavorText": "POWER OVERWHELMING",
+  "id": "67",
+  "measurement": "ml",
+  "restockRate": 20,
+  "title": "Potion of mitochondrial awakening",
+  "volume": 100
+ },
+ "2": {
+  "attMod": "+5",
+  "attName": "Dexterity",
+  "costByVolume": 200,
+  "flavorText": "It's all about finger strength, baby.",
+  "id": "1",
+  "measurement": "ml",
+  "restockRate": 20,
+  "title": "Potion of Finger Strength",
+  "volume": 100
+ },
+ "3": {
+  "attMod": "+5/-5",
+  "attName": "Vitality/Dexterity",
+  "costByVolume": 250,
+  "flavorText": "OUCH. Gimme another!",
+  "id": "2",
+  "measurement": "ml",
+  "restockRate": 20,
+  "title": "Potion of Masochism",
+  "volume": 100
+ },
+ "4": {
+  "attMod": "-2",
+  "attName": "Strength",
+  "costByVolume": 100,
+  "flavorText": "I was born with glass bones and paper skin. Would you like to buy some chocolate?",
+  "id": "0",
+  "measurement": "ml",
+  "restockRate": 20,
+  "title": "Potion of Feebleness",
+  "volume": 100
+ }
+}
