@@ -1,15 +1,16 @@
 import * as c from './../actions/ActionTypes';
 
 import potionAll from '../assets/potionAll';
-import { v4 } from 'uuid'
 
-export default (state = {}, action) => {
+// import { v4 } from 'uuid'
+
+export default (state = potionAll, action) => {
   const { title, attName, attMod, flavorText, volume, id, costByVolume, restockRate } = action;
+  
   switch (action.type) {
-    case c.START_UP:
-      return potionAll
     case c.ADD_POTION:
-      return Object.assign({}, state, {
+      console.log(state); //this should log the state anytime the reducer is called to show us when it's changing
+      return Object.assign({}, state, {     // this needs to be an array
         [id]: {
           title: title,
           attName: attName,

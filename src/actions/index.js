@@ -33,9 +33,3 @@ export const updateAccount = (id, debtCredit, potion) => ({
     type: c.UPDATE_ACCOUNT,
     debtCredit: debtCredit
 });
-export const startUp = (masterPotionAll) => {
-    return {
-        type: c.START_UP,
-        masterPotionAll: masterPotionAll
-    }
-};

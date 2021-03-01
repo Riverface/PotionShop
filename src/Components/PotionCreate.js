@@ -1,4 +1,5 @@
-import Moment from 'moment';
+// import Moment from 'moment';
+
 import PotionForm from './PotionForm';
 import PropTypes from "prop-types";
 import React from 'react'
@@ -9,7 +10,7 @@ function PotionCreate(props) {
         <React.Fragment>
             <PotionForm
                 formSubmissionHandler={handlePotionCreateSubmission}
-                buttonText="Help!" />
+                buttonText="Submit Potion" />
         </React.Fragment>
     );
 

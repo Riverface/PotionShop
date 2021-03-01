@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const styles = { minWidth: "30vw", maxWidth: "30vw", minHeight: "35vh", maxHeight: "35vh", margin: "auto", display: "inline", position: "absolute", border: "10px red outset", borderRadius: "10px", background: "#FA8072", borderStyle: "outset" };
+const styles = { minWidth: "30vw", maxWidth: "30vw", minHeight: "35vh", maxHeight: "35vh", margin: "auto", display: "inline", position: "absolute", border: "10px red outset", borderRadius: "10px", background: "#FA8072", borderStyle: "outset", zIndex:"1000" };
 
 
 function PotionDelete(props) {
