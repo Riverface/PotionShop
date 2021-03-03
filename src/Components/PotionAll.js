@@ -18,6 +18,7 @@ function PotionAll(props) {
     borderStyle: "inset",
     borderRadius: "5px",
   }
+
   return (
     <div style={listStyle}>
       { Object.values(props.potionAll).map((potion) => {
@@ -40,7 +41,8 @@ function PotionAll(props) {
 
 PotionAll.propTypes = {
   potionAll: PropTypes.object,
-  onPotionSelection: PropTypes.func.isRequired
+  onPotionSelection: PropTypes.func.isRequired,
+  volumeUpdater: PropTypes.func
 };
 
 export default PotionAll;

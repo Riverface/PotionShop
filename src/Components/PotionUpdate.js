@@ -25,6 +25,7 @@ export function PotionUpdate(props) {
         </React.Fragment>
     );
 }
+
 PotionUpdate.propTypes = {
     potion: PropTypes.object,
     onUpdate: PropTypes.func

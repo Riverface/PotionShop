@@ -9,12 +9,9 @@ import PropTypes from "prop-types";
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import Moment from 'moment';
-
 class PotionControl extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.masterPotionAll);
         this.state = {
             selectedPotion: null,
             editing: false,
@@ -33,19 +30,10 @@ class PotionControl extends React.Component {
 
     componentDidMount() {
         const potionAll = this.props.masterPotionAll;
-
-        this.waitTimeUpdateStock = setInterval(() =>
-            this.volumeUpdater(),
-            1000
-        );
-    }
-
-    componentDidUpdate() {
-        // console.log("component updated!");
+        this.waitTimeUpdateStock = setInterval(() => this.volumeUpdater(), 1000);
     }
 
     componentWillUnmount() {
-        // console.log("component unmounted!");
         clearInterval(this.waitTimeUpdateStock);
     }
 
@@ -77,18 +65,19 @@ class PotionControl extends React.Component {
     }
 
     sellStockHandler = (quantity) => {
+        const { dispatch } = this.props;
         let potionToEdit = this.state.selectedPotion;
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
         const allPotionsChanged = this.props.masterPotionAll[potionToEdit.id];
-        potionToEdit.volume += 100 * quantity;
-        if ((100 * quantity) <= this.state.selectedPotion.volume) {
-            this.setState(prevState => (
-                {
-                    masterPotionAll: allPotionsChanged,
-                    debtCredit: prevState.debtCredit -= newCost
-                }
-            ))
+        if ((100 * quantity) + potionToEdit.volume > 0) {
+            potionToEdit.volume += 100 * quantity;
+            this.setState(prevState => ({
+                masterPotionAll: allPotionsChanged,
+                debtCredit: prevState.debtCredit -= newCost
+            }));
         }
+        const action = a.addPotion(potionToEdit);
+        dispatch(action);
     }
 
     handleAddingNewPotionToList = (newPotion) => {
@@ -99,16 +88,13 @@ class PotionControl extends React.Component {
         dispatch(action2);
     }
 
-    handleChangingSelectedPotion = (id) => {        // When you click a potion
-        console.log("I DID IT");
+    handleChangingSelectedPotion = (id) => {
         const selectedPotion = this.props.masterPotionAll[id];
         this.setState({ selectedPotion: selectedPotion });
     }
 
     deleteDialogHandler = () => {
-        this.setState({
-            deleting: true
-        });
+        this.setState({ deleting: true });
     }
     handleDeletingPotion = (id) => {
         const { dispatch } = this.props;
@@ -120,7 +106,6 @@ class PotionControl extends React.Component {
             editing: false
         });
     }
-
     render(props) {
         let currentlyVisibleState = null;
         let buttonText = null;
@@ -128,17 +113,14 @@ class PotionControl extends React.Component {
             currentlyVisibleState = <PotionUpdate potion={this.state.selectedPotion} onUpdate={this.handleEditingPotionInList} />
             buttonText = "Return to Potion List";
         } else if (this.state.selectedPotion !== null) {
-            currentlyVisibleState = <PotionRead potion={this.state.selectedPotion} deleteDialogHandler={this.deleteDialogHandler} onClickingUpdate={this.handleUpdateClick} stockSell={this.sellStockHandler} handleDeletingPotion={this.handleDeletingPotion} deleting={this.state.deleting} />
+            currentlyVisibleState = <PotionRead potion={this.state.selectedPotion} deleteDialogHandler={this.deleteDialogHandler} onClickingUpdate={this.handleUpdateClick} stockSell={this.sellStockHandler} handleDeletingPotion={this.handleDeletingPotion} deleting={this.state.deleting} volumeUpdater={this.volumeUpdater} />
             buttonText = "Return to Potion List";
-            // While our PotionRead component only takes placeholder data, we will eventually be passing the value of selectedPotion as a prop.
         } else if (this.props.formVisibleOnPage) {
-            // This conditional needs to be updated to "else if."
             currentlyVisibleState = <PotionCreate onNewPotionCreation={this.handleAddingNewPotionToList} />;
             buttonText = "Return to Potion List";
         }
         else {
-            currentlyVisibleState = <PotionAll potionAll={this.props.masterPotionAll} onPotionSelection={this.handleChangingSelectedPotion} />;
-            // Because a user will actually be clicking on the potion in the Potion component, we will need to pass our new handleChangingSelectedPotion method as a prop.
+            currentlyVisibleState = <PotionAll potionAll={this.props.masterPotionAll} onPotionSelection={this.handleChangingSelectedPotion} volumeUpdater={this.volumeUpdater} />;
             buttonText = "Add Potion";
         }
         return (
@@ -148,14 +130,12 @@ class PotionControl extends React.Component {
             </ React.Fragment>
         );
     }
-
 }
 
 PotionControl.propTypes = {
     masterPotionAll: PropTypes.object,
     formVisibleOnPage: PropTypes.bool,
     debtCredit: PropTypes.number
-
 };
 
 const mapStateToProps = state => {

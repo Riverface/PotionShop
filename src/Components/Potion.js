@@ -8,12 +8,8 @@ function Potion(props) {
         <React.Fragment>
             <div onClick={() => props.onPotionSelection(props.id)}>
                 <h3>
-                    <div>
-                        {props.title}
-                    </div>
-
-                    <div>
-                        <p>Attribute: {props.attName} {props.attMod}/mL</p></div>
+                    <div>{props.title}</div>
+                    <div><p>Attribute: {props.attName} {props.attMod}/mL</p></div>
                     <div>
                         <div>
                             <p>Quantity: {props.volume} {props.measurement}</p>
@@ -24,7 +20,8 @@ function Potion(props) {
                     </div>
                 </h3>
                 <hr />
-            </div></React.Fragment>
+            </div>
+        </React.Fragment>
     );
 }
 

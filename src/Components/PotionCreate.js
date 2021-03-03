@@ -1,16 +1,13 @@
-// import Moment from 'moment';
-
 import PotionForm from './PotionForm';
 import PropTypes from "prop-types";
 import React from 'react'
-import { v4 } from 'uuid'; // new code
+import { v4 } from 'uuid';
 
 function PotionCreate(props) {
+    let potion = {};
     return (
         <React.Fragment>
-            <PotionForm
-                formSubmissionHandler={handlePotionCreateSubmission}
-                buttonText="Submit Potion" />
+            <PotionForm formSubmissionHandler={handlePotionCreateSubmission} potion={potion} buttonText="Submit Potion" />
         </React.Fragment>
     );
 
@@ -29,7 +26,8 @@ function PotionCreate(props) {
     }
 }
 PotionCreate.propTypes = {
-    onNewPotionCreation: PropTypes.func
+    onNewPotionCreation: PropTypes.func,
+    volumeUpdater: PropTypes.func
 };
 
 export default PotionCreate;

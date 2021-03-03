@@ -18,16 +18,16 @@ export const addPotion = (potion) => {
         flavorText: flavorText,
         measurement: measurement,
         volume: volume,
-        costByVolume: costByVolume,
-        restockRate: restockRate
+        costByVolume: parseInt(costByVolume),
+        restockRate: parseInt(restockRate)
     }
 };
 
 export const updateStock = (id, restockRate, volume) => ({
     type: c.UPDATE_STOCK,
     id: id,
-    restockRate: restockRate,
-    volume: volume
+    restockRate: parseInt(restockRate),
+    volume: parseInt(volume)
 });
 export const updateAccount = (id, debtCredit, potion) => ({
     type: c.UPDATE_ACCOUNT,
