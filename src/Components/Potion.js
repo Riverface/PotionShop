@@ -13,7 +13,7 @@ function Potion(props) {
                     <div>
                         <div>
                             <p>Quantity: {props.volume} {props.measurement}</p>
-                            <p>Quantity: {props.restockRate} ml/s</p>
+                            <p>Rate of Restock: {props.restockRate} ml/s</p>
                         </div>
                         <p>{props.flavorText}</p>
                         <p>{props.costByVolume + " GP/vol"} </p>
