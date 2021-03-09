@@ -1,8 +1,12 @@
 # Potion Shop
 
-### A potion shop with flexible parameters to allow for different measurements.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### A potion shop with flexible parameters, debt & credit, and confirmation upon delete.
+
+
+
+
+### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Component Tree:
 ![Component Tree](componentTree.png)
