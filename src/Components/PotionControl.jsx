@@ -106,7 +106,7 @@ class PotionControl extends React.Component {
             currentlyVisibleState = <PotionUpdate potion={this.props.selectedPotion} onUpdate={this.handleEditingPotionInList} />
             buttonText = "Return to Potion List";
         } else if (this.props.selectedPotion !== null) {
-            currentlyVisibleState = <PotionRead potion={this.props.selectedPotion} deleteDialogHandler={this.deleteDialogHandler} onClickingUpdate={this.handleUpdateClick} stockSell={this.sellStockHandler} deletingPotion={this.props.deletingPotion} handleDeletingPotion={this.handleDeletingPotion} volumeUpdater={this.volumeUpdater} debtcredit={this.props.debtCredit} />
+            currentlyVisibleState = <PotionRead potion={this.props.selectedPotion} deleteDialogHandler={this.deleteDialogHandler} onClickingUpdate={this.handleUpdateClick} stockSell={this.sellStockHandler} deletingPotion={this.props.deletingPotion} handleDeletingPotion={this.handleDeletingPotion} volumeUpdater={this.volumeUpdater} debtCredit={this.props.debtCredit} />
             buttonText = "Return to Potion List";
         } else if (this.props.formVisibleOnPage) {
             currentlyVisibleState = <PotionCreate onNewPotionCreation={this.handleAddingNewPotionToList} />;
