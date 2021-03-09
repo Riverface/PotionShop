@@ -4,9 +4,7 @@ export const deletePotion = id => ({
     type: c.DELETE_POTION,
     id
 });
-export const toggleForm = () => ({
-    type: c.TOGGLE_FORM
-});
+
 export const addPotion = (potion) => {
     const { title, id, attName, attMod, flavorText, measurement, volume, costByVolume, restockRate } = potion;
     return {
@@ -27,9 +25,28 @@ export const updateStock = (id, restockRate, volume) => ({
     type: c.UPDATE_STOCK,
     id: id,
     restockRate: parseInt(restockRate),
-    volume: parseInt(volume)
+    volume: parseInt(volume),
 });
-export const updateAccount = (id, debtCredit, potion) => ({
+export const updateAccount = (debtCredit) => ({
     type: c.UPDATE_ACCOUNT,
-    debtCredit: debtCredit
+    debtCredit: debtCredit,
+});
+
+export const deletingPotion = (deletingPotion) => ({
+    type: c.DELETING_POTION,
+    deletingPotion: deletingPotion
+});
+
+export const editingPotion = (editingPotion) => ({
+    type: c.EDITING_POTION,
+    editingPotion: editingPotion
+});
+export const selectPotion = (selectedPotion, id) => ({
+    type: c.SELECT_POTION,
+    id: id,
+    selectedPotion: selectedPotion
+});
+export const toggleForm = (formVisibleOnPage) => ({
+    type: c.TOGGLE_FORM,
+    formVisibleOnPage: formVisibleOnPage,
 });

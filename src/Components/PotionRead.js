@@ -5,7 +5,7 @@ import React from 'react';
 function PotionRead(props) {
     const { potion } = props; //new code
     let deleteVisibility = null;
-    if (props.deleting === true) {
+    if (props.deletingPotion === true) {
         deleteVisibility = <PotionDelete onClickingDelete={props.handleDeletingPotion} potion={potion} ></PotionDelete>
     }
     const dose = -potion.volume / 100; // each dose is 100ml
@@ -38,7 +38,7 @@ PotionRead.propTypes = {
     onClickingUpdate: PropTypes.func,
     stockSell: PropTypes.func,
     handleDeletingPotion: PropTypes.func,
-    deleting: PropTypes.bool,
+    deletingPotion: PropTypes.bool,
     componentDidMount: PropTypes.func
 };
 
