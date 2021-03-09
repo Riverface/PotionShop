@@ -24,7 +24,7 @@ function PotionRead(props) {
                     <p>{potion.volume}ml  </p>
                     <p>{(potion.volume / 100)} potion(s)</p>
                     <p>restock rate: {potion.restockRate}</p>
-                    Doses to stock/sell: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={dose} ></input>
+                    Doses to sell/stock: <input id="dosesSold" type="number" name="dosesSold" defaultValue={0} min={dose} ></input>
                 </div>
             </div>
         </React.Fragment>

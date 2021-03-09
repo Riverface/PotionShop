@@ -13,7 +13,10 @@ describe("rootReducer", () => {
   test('Should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toMatchObject({
       masterPotionAll: defaultList,
-      formVisibleOnPage: false
+      formVisibleOnPage: false,
+      deletingPotion: false,
+      editingPotion: false,
+      selectedPotion: null
     });
   });
   test('Check that initial state of potionAllReducer matches root reducer', () => {

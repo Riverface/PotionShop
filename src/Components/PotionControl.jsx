@@ -21,11 +21,11 @@ class PotionControl extends React.Component {
 
     componentDidMount() {
         const potionAll = this.props.masterPotionAll;
-        this.waitTimeUpdateStock = setInterval(() => this.volumeUpdater(), 1000);
+        this.volumeUpdateStock = setInterval(() => this.volumeUpdater(), 1000);
     }
 
     componentWillUnmount() {
-        clearInterval(this.waitTimeUpdateStock);
+        clearInterval(this.volumeUpdateStock);
     }
 
     handleEditingPotionInList = (potionToEdit) => {
@@ -46,13 +46,11 @@ class PotionControl extends React.Component {
 
     handleClick = () => {
         const { dispatch } = this.props;
-        if (this.props.selectedPotion === null) {
-            const action = a.toggleForm(this.props.formVisibleOnPage);
-            dispatch(action);
-        }
-        else {
+        if (this.props.selectedPotion !== null) {
             const action2 = a.selectPotion(null);
             dispatch(action2);
+        }
+        else {
             const action = a.toggleForm(this.props.formVisibleOnPage);
             dispatch(action);
         }
@@ -122,8 +120,9 @@ class PotionControl extends React.Component {
         return (
             <React.Fragment>
                 {currentlyVisibleState}
-                <button onClick={() => this.handleClick}>{buttonText}{ }</button>
-                {this.props.debtCredit}
+                <button onClick={this.handleClick}>{buttonText}</button>
+                Account: 
+                ${this.props.debtCredit}
             </ React.Fragment>
         );
     }
