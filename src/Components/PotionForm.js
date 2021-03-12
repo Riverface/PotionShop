@@ -32,7 +32,7 @@ export function PotionForm(props) {
             type='text'
             name='title'
             required={true}
-            defaultValue={(potion.title == undefined) ? "" : potion.title}
+            defaultValue={(potion.title === undefined) ? "" : potion.title}
             placeholder={potion ? potion.title : 'Potion Title...'} />
         </div>
         <div>

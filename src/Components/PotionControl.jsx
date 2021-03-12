@@ -20,7 +20,6 @@ class PotionControl extends React.Component {
     }
 
     componentDidMount() {
-        const potionAll = this.props.masterPotionAll;
         this.volumeUpdateStock = setInterval(() => this.volumeUpdater(), 1000);
     }
 
@@ -58,7 +57,6 @@ class PotionControl extends React.Component {
 
     sellStockHandler = (quantity) => {
         const { dispatch } = this.props;
-        let credit = this.props.debtCredit;
         let potionToEdit = this.props.selectedPotion;
         const newCost = parseInt(quantity) * parseInt(potionToEdit.costByVolume);
         potionToEdit.volume += quantity * 100;
@@ -81,7 +79,7 @@ class PotionControl extends React.Component {
     handleChangingSelectedPotion = (id) => {
         const { dispatch } = this.props;
         const action = a.selectPotion(this.props.masterPotionAll[id]);
-        this.props.dispatch(action);
+        dispatch(action);
     }
 
     deleteDialogHandler = () => {
